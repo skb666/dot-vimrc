@@ -4,6 +4,7 @@
 let $PLUG = $VIMHOME . "/plug.vim"
 source $PLUG
 
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " -----------------------------------------------------------------------------
 " YouCompleteMe

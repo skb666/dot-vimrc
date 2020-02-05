@@ -107,6 +107,6 @@ Plug 'fisadev/fisa-vim-colorscheme'
 Plug 'xolox/vim-misc'
 Plug 'vim-scripts/DrawIt'
 Plug 'vim-scripts/AutoFenc.vim' " detect file encoding
-
+Plug 'Yggdroot/indentLine'
 
 call plug#end()

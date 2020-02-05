@@ -56,13 +56,17 @@ set hlsearch
 " Editor settings
 set history=1000
 set tm=2000                        " leader key timeout
-set nofoldenable                   " disable folding
+set foldenable                     " 开始折叠
+set foldmethod=syntax              " 设置语法折叠
+set foldcolumn=0                   " 设置折叠区域的宽度
+setlocal foldlevel=1               " 设置折叠层数为
+set foldlevelstart=99              " 打开文件是默认不折叠代码
 set confirm                        " prompt when existing from an unsaved file
 set backspace=indent,eol,start     " more powerful backspacing
 set t_Co=256                       " explicitly tell vim that the terminal has 256 colors
 set mouse=a                        " use mouse in all modes
 set report=0                       " always report number of lines changed
-set nowrap                         " don't wrap lines
+set wrap                         " don't wrap lines
 set scrolloff=5                    " 5 lines above/below cursor when scrolling
 set number                         " show line numbers
 set showmatch                      " show matching bracket (briefly jump)
@@ -216,9 +220,9 @@ func! QuickRun()
     exec "w"
     let l:ft = &filetype
     if ft == 'c' || ft == 'cpp' || ft == 'cc'
-        exec "!run-cc.py % && time ./%<.out"
+        exec "!time g++ % -o %< && echo && time ./%<"
     elseif ft == 'python'
-        exec "!time python2.7 %"
+        exec "!clear && time python3 %"
     elseif ft == 'lua'
         exec "!time lua %"
     elseif ft == 'java'
@@ -235,6 +239,9 @@ endfunc
 " => Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 cmap w!! w !sudo tee >/dev/null %
+
+" 用空格键来开关折叠
+nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
 " Allow the normal use of "," by pressing it twice
 noremap ,, ,

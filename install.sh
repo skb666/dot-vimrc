@@ -15,7 +15,7 @@ for i in git make vim; do
     fi
 done
 
-endpath="$HOME/.tianchaijz-vim"
+endpath="$HOME/.vim_runtime"
 vimdir="$HOME/.vim"
 plug=plug.vim
 bundles=bundles.vim
@@ -38,11 +38,11 @@ done
 
 if $pull_enable; then
     if [ ! -e $endpath/.git ]; then
-        msg "Cloning tianchaijz/dot-vimrc"
-        git clone https://github.com/tianchaijz/dot-vimrc.git $endpath
+        msg "Cloning skb666/dot-vimrc"
+        git clone https://github.com/skb666/dot-vimrc.git $endpath
     else
         msg "Existing installation detected"
-        msg "Updating from tianchaijz/dot-vimrc"
+        msg "Updating from skb666/dot-vimrc"
         cd $endpath && git pull --rebase origin master
     fi
 
