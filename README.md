@@ -8,7 +8,7 @@ be used to it.
 
 One command does it all.
 
-    curl -o - https://raw.githubusercontent.com/tianchaijz/dot-vimrc/master/install.sh | sh
+    curl -o - https://raw.githubusercontent.com/skb666/dot-vimrc/master/install.sh | sh
 
 Don't worry, it will back up your existing Vim configuration.
 
@@ -86,6 +86,7 @@ zj            | Move the cursor to the next fold
 zk            | Move the cursor to the previous fold
 [z            | Move to start of open fold
 ]z            | Move to end of open fold
+<Space>       | quick open/close fold
 
 ### Conversion
 Key           | Action
