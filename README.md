@@ -86,7 +86,7 @@ zj            | Move the cursor to the next fold
 zk            | Move the cursor to the previous fold
 [z            | Move to start of open fold
 ]z            | Move to end of open fold
-<Space>       | quick open/close fold
+\<Space\>       | quick open/close fold
 
 ### Conversion
 Key           | Action
