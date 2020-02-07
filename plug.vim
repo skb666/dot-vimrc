@@ -48,7 +48,8 @@ Plug 'mileszs/ack.vim'
 Plug 'rking/ag.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'bling/vim-airline'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'Chiel92/vim-autoformat'
@@ -71,6 +72,7 @@ Plug 'rosstimson/scala-vim-support'
 Plug 'pbrisbin/html-template-syntax'
 Plug 'mzlogin/vim-markdown-toc' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
+Plug 'davidhalter/jedi-vim'
 
 " -----------------------------------------------------------------------------
 " Git
@@ -108,5 +110,6 @@ Plug 'xolox/vim-misc'
 Plug 'vim-scripts/DrawIt'
 Plug 'vim-scripts/AutoFenc.vim' " detect file encoding
 Plug 'Yggdroot/indentLine'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
