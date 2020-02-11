@@ -220,13 +220,13 @@ func! QuickRun()
     exec "w"
     let l:ft = &filetype
     if ft == 'c' || ft == 'cpp' || ft == 'cc'
-        exec "!time g++ % -o %< && echo && time ./%<"
+        exec "!time g++ % -o %:r && echo && time ./%:r"
     elseif ft == 'python'
         exec "!clear && time python3 %"
     elseif ft == 'lua'
         exec "!time lua %"
     elseif ft == 'java'
-        exec "!javac % && time java %<"
+        exec "!time java %"
     elseif ft == 'go'
         exec "!go build % && time ./%<"
     elseif ft == 'sh'

@@ -40,7 +40,7 @@ augroup omni_completion
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType c setlocal omnifunc=ccomplete#Complete
 augroup END
 
@@ -54,6 +54,8 @@ nnoremap <silent> <leader>yf :YcmCompleter FixIt<CR>
 nnoremap <silent> <leader>yg :YcmCompleter GoTo<CR>
 nnoremap <silent> <leader>yi :YcmCompleter GoToInclude<CR>
 nnoremap <silent> <leader>yt :YcmCompleter GetType<CR>
+
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 
 " -----------------------------------------------------------------------------
@@ -71,17 +73,19 @@ let g:ale_set_highlights = 0
 "自定义error和warning图标
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚡'
-"在vim自带的状态栏中整合ale
-let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
 "显示Linter名称,出错或警告等相关信息
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
+let g:ale_lint_on_enter=0
+let g:ale_lint_on_text_changed='normal'
+let g:ale_lint_on_insert_leave=1
 let g:ale_linters = {
-    \   'c++': ['cppcheck'],
-    \   'c': ['cppcheck'],
+    \   'c++': ['cppcheck', 'clang'],
+    \   'c': ['cppcheck', 'clang'],
     \   'python': ['flake8', 'mypy', 'pylint'],
+    \   'java': ['javac'],
     \   'reStructuredText': ['rstcheck'],
 \ }
 let g:ale_fixers = {'python': ['remove_trailing_lines', 'trim_whitespace', 'autopep8']}
@@ -93,10 +97,6 @@ nmap <leader>s :ALEToggle<CR>
 "<Leader>d查看错误或警告的详p信
 nmap <leader>d :ALEDetail<CR>
 
-
-" -----------------------------------------------------------------------------
-" Jedi-vim
-" -----------------------------------------------------------------------------
 
 " -----------------------------------------------------------------------------
 " UltiSnips
