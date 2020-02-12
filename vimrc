@@ -74,7 +74,7 @@ set showcmd                        " show typed command in status bar
 set title                          " show file in titlebar
 set laststatus=2                   " use 2 lines for the status bar
 set matchtime=2                    " show matching bracket for 0.2 seconds
-set matchpairs+=<:>                " specially for html
+" set matchpairs+=<:>                " specially for html
 set lazyredraw                     " don't redraw while executing macros (good performance config)
 set magic                          " for regular expressions turn magic on
 set foldcolumn=1                   " add a bit extra margin to the left
@@ -252,7 +252,7 @@ noremap <leader>; ;
 cmap WQ wq
 cmap QA qa
 
-inoremap jj <ESC>
+" inoremap jj <ESC>
 
 if exists("$TMUX") == 0
     nnoremap <C-h> <C-w>h

@@ -74,7 +74,7 @@ Plug 'mzlogin/vim-markdown-toc' | Plug 'plasticboy/vim-markdown', { 'for': 'mark
 
 Plug 'davidhalter/jedi-vim'
 
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+"Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 
 " -----------------------------------------------------------------------------
 " Git
