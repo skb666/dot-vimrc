@@ -45,8 +45,8 @@ augroup omni_completion
 augroup END
 
 " YouCompleteMe key bindings
-nnoremap <F11> :YcmForceCompileAndDiagnostics<CR>
-nnoremap <F12> :YcmDiags<CR>
+" nnoremap <F11> :YcmForceCompileAndDiagnostics<CR>
+" nnoremap <F12> :YcmDiags<CR>
 
 " YcmCompleter Subcommands
 nnoremap <silent> <leader>yd :YcmCompleter GetDoc<CR>
@@ -72,7 +72,7 @@ let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
 "自定义error和warning图标
 let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
+let g:ale_sign_warning = '✹'
 "显示Linter名称,出错或警告等相关信息
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -139,13 +139,29 @@ autocmd FileType ocaml nmap <leader>i :MerlinTypeOf<CR>
 " -----------------------------------------------------------------------------
 " NERDTree
 " -----------------------------------------------------------------------------
-let NERDChristmasTree = 0
 let NERDTreeWinSize = 30
-let NERDTreeChDirMode = 2
-let NERDTreeIgnore = ['\~$', '\.pyc$', '\.swp$']
-let NERDTreeSortOrder = ['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
-let NERDTreeShowBookmarks = 1
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeHighlightFolders = 1
+let g:NERDTreeHighlightFoldersFullName = 1
+let g:NERDTreeDirArrowExpandable='▷'
+let g:NERDTreeDirArrowCollapsible='▼'
+let g:NERDTreeShowHidden=1
 let NERDTreeWinPos = 'right'
+
+let g:NERDTreeIndicatorMapCustom = {
+            \ "Modified"  : "✹",
+            \ "Staged"    : "✚",
+            \ "Untracked" : "✭",
+            \ "Renamed"   : "➜",
+            \ "Unmerged"  : "═",
+            \ "Deleted"   : "✖",
+            \ "Dirty"     : "✗",
+            \ "Clean"     : "✔︎",
+            \ 'Ignored'   : '☒',
+            \ "Unknown"   : "?"
+            \ }
 
 
 " -----------------------------------------------------------------------------
@@ -153,6 +169,18 @@ let NERDTreeWinPos = 'right'
 " -----------------------------------------------------------------------------
 let NERDSpaceDelims = 1
 let NERDCompactSexyComs = 1
+
+" airline
+let g:airline_theme="onedark"
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 
 
 " -----------------------------------------------------------------------------

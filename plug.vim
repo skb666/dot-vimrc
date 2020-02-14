@@ -43,22 +43,26 @@ Plug 'tpope/vim-surround'
 " -----------------------------------------------------------------------------
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'scrooloose/nerdcommenter'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'rking/ag.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'fholgado/minibufexpl.vim'
+" Plug 'fholgado/minibufexpl.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'rhysd/vim-clang-format'
 Plug 'let-def/ocp-indent-vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-scripts/Mark'
-
+Plug 'junegunn/vim-slash'
 Plug 'lepture/vim-jinja'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-haml'
@@ -74,7 +78,7 @@ Plug 'mzlogin/vim-markdown-toc' | Plug 'plasticboy/vim-markdown', { 'for': 'mark
 
 Plug 'davidhalter/jedi-vim'
 
-"Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 
 " -----------------------------------------------------------------------------
 " Git

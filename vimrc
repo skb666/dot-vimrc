@@ -71,7 +71,8 @@ set scrolloff=5                    " 5 lines above/below cursor when scrolling
 set number                         " show line numbers
 set showmatch                      " show matching bracket (briefly jump)
 set showcmd                        " show typed command in status bar
-set title                          " show file in titlebar
+set cmdheight=2                    " cmd行数
+" set title                          " show file in titlebar
 set laststatus=2                   " use 2 lines for the status bar
 set matchtime=2                    " show matching bracket for 0.2 seconds
 " set matchpairs+=<:>                " specially for html
@@ -82,9 +83,10 @@ set backspace=eol,start,indent     " it acts as it should act
 set wildmenu                       " wildmenu
 set wildmode=longest,list,full     " tab complete files up to longest unambiguous prefix
 set so=7                           " set 7 lines to the cursor - when moving vertically using j/k
-set cc=80                          " color the 80th column
+" set cc=80                          " color the 80th column
 set foldmethod=syntax              " fold by syntax
 set whichwrap+=<,>,h,l
+set autochdir
 
 if $TMUX == ''
     set clipboard+=unnamed         " copy selection to OS X clipboard
@@ -121,26 +123,26 @@ set softtabstop=4 " backspace
 set shiftwidth=4  " indent width
 set expandtab     " expand tab to space
 set smarttab
-set formatoptions+=mM
+" set formatoptions+=mM
 
 " Linebreak on 500 characters
 set lbr
 set textwidth=500
 
-augroup lang_config
-    autocmd!
-    autocmd FileType ruby,ocaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80
-    autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
-    autocmd FileType coffee,javascript,yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80
-    autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=80
-    autocmd FileType html,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType sass,scss,css setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80
-    autocmd BufRead,BufNewFile *.tex setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80 ft=tex
-    autocmd BufEnter Makefile setlocal noexpandtab
-    autocmd FileType mkd setlocal spell textwidth=80
-    autocmd Filetype gitcommit setlocal spell textwidth=72
-    autocmd BufRead,BufNewFile *.lua,*.c,*.py,*.sh,*.pl,*.rb,*.erb 2match Underlined /.\%81v/
-augroup END
+" augroup lang_config
+    " autocmd!
+    " autocmd FileType ruby,ocaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80
+    " autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
+    " autocmd FileType coffee,javascript,yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80
+    " autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=80
+    " autocmd FileType html,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    " autocmd FileType sass,scss,css setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80
+    " autocmd BufRead,BufNewFile *.tex setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80 ft=tex
+    " autocmd BufEnter Makefile setlocal noexpandtab
+    " autocmd FileType mkd setlocal spell textwidth=80
+    " autocmd Filetype gitcommit setlocal spell textwidth=72
+    " autocmd BufRead,BufNewFile *.lua,*.c,*.py,*.sh,*.pl,*.rb,*.erb 2match Underlined /.\%81v/
+" augroup END
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -219,18 +221,42 @@ endfunc
 func! QuickRun()
     exec "w"
     let l:ft = &filetype
+    let l:newline = "echo \"=======================运行=======================\" "
     if ft == 'c' || ft == 'cpp' || ft == 'cc'
-        exec "!time g++ % -o %:r && echo && time ./%:r"
+        exec "!clear && time g++ % -o %:r &&".newline."&& time ./%:r"
     elseif ft == 'python'
-        exec "!clear && time python3 %"
+        exec "!clear &&".newline."&& time python3 %"
     elseif ft == 'lua'
-        exec "!time lua %"
+        exec "!".newline."&& time lua %"
     elseif ft == 'java'
-        exec "!time java %"
+        exec "!clear && javac -source 13 --enable-preview % &&".newline."&& time java --enable-preview %:r"
     elseif ft == 'go'
-        exec "!go build % && time ./%<"
+        exec "!go build % &&".newline."&& time ./%<"
     elseif ft == 'sh'
-        exec "!time sh %"
+        exec "!".newline."&& time sh %"
+    endif
+endfunc
+
+func! FormatCode()
+    exec "w"
+    let l:ft = &filetype
+    if ft == 'c' || &filetype == 'h'
+        exec "!astyle --style=allman --suffix=none %"
+    elseif ft == 'cpp' || &filetype == 'cc' || &filetype == 'hpp'
+        exec "!astyle --style=allman --suffix=none %"
+    elseif ft == 'perl'
+        exec "!astyle --style=gnu --suffix=none %"
+    elseif ft == 'py'|| &filetype == 'python'
+        exec "!autopep8 --in-place --aggressive %"
+    elseif ft == 'java'
+        exec "!astyle --style=java --suffix=none %"
+    elseif ft == 'jsp'
+        exec "!astyle --style=gnu --suffix=none %"
+    elseif ft == 'xml'
+        exec "!astyle --style=gnu --suffix=none %"
+    else
+        exec "normal gg=G"
+        return
     endif
 endfunc
 
@@ -254,12 +280,17 @@ cmap QA qa
 
 " inoremap jj <ESC>
 
-if exists("$TMUX") == 0
-    nnoremap <C-h> <C-w>h
-    nnoremap <C-j> <C-w>j
-    nnoremap <C-k> <C-w>k
-    nnoremap <C-l> <C-w>l
-endif
+" if exists("$TMUX") == 0
+    " nnoremap <C-h> <C-w>h
+    " nnoremap <C-j> <C-w>j
+    " nnoremap <C-k> <C-w>k
+    " nnoremap <C-l> <C-w>l
+" endif
+
+nnoremap <leader><Left> <C-w>h
+nnoremap <leader><Down> <C-w>j
+nnoremap <leader><Up> <C-w>k
+nnoremap <leader><Right> <C-w>l
 
 " Fix <Up> and <Down> keys inserting A B character
 inoremap <Esc>OA <Esc>ki
@@ -287,11 +318,12 @@ nmap <leader>p :set paste! paste?<CR>"
 nmap <leader>nb :set number! number?<CR>
 
 " Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <silent> <leader>e :e $MYVIMRC<CR>
+" nmap <silent> <leader>ev :e $MYVIMRC<CR>
+" nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Open file prompt with current path
-nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+" nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 
 " Disable highlight when <leader><CR> is pressed
 " But preserve cursor coloring
@@ -302,8 +334,8 @@ vnoremap <leader>tee :!tee /tmp/t<CR>
 vnoremap <leader>cat :!cat /tmp/t<CR>
 
 " Movement between tabs OR buffers
-nnoremap Q :call TabPrev()<CR>
-nnoremap W :call TabNext()<CR>
+nnoremap <C-p> :call TabPrev()<CR>
+nnoremap <C-n> :call TabNext()<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -375,7 +407,18 @@ vnoremap <leader>qd <Esc>:call QuickWrap('"')<CR>
 vnoremap <leader>qb <Esc>:call QuickWrap('`')<CR>
 
 " Quick run
-nnoremap <leader>1 :call QuickRun()<CR>
+nnoremap <F10> :call QuickRun()<CR>
+nnoremap <F9> :call FormatCode()<CR>
+nnoremap <F8> gg=G<CR>
+
+vmap <leader><leader>y "+y
+nnoremap <leader><leader>p "+p
+
+nnoremap <leader>h :execute ":help " . expand("<cword>")<cr>
+
+nnoremap <leader><leader>i :PlugInstall<cr>
+nnoremap <leader><leader>u :PlugUpdate<cr>
+nnoremap <leader><leader>c :PlugClean<cr>
 
 " Navigate between split panes
 nnoremap gh <C-W><C-H>
