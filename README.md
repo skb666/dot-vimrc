@@ -130,7 +130,9 @@ F2            | Toggle paste
 F3            | Toggle Indent Guides
 F4            | Toggle tagbar
 F5            | Toggle Nerd-Tree file viewer
-F10           | Toggle line number
+F8            | alignment indentation
+F9            | formate code
+F10           | Run code
 
 
 ## Dependencies
