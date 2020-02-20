@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 " -----------------------------------------------------------------------------
 " Code completions
 " -----------------------------------------------------------------------------
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'Raimondi/delimitMate'
 Plug 'ervandew/supertab'
 
