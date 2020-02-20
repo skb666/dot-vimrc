@@ -71,7 +71,7 @@ set scrolloff=5                    " 5 lines above/below cursor when scrolling
 set number                         " show line numbers
 set showmatch                      " show matching bracket (briefly jump)
 set showcmd                        " show typed command in status bar
-set cmdheight=2                    " cmd行数
+" set cmdheight=2                    " cmd行数
 " set title                          " show file in titlebar
 set laststatus=2                   " use 2 lines for the status bar
 set matchtime=2                    " show matching bracket for 0.2 seconds
@@ -143,7 +143,11 @@ set textwidth=500
     " autocmd Filetype gitcommit setlocal spell textwidth=72
     " autocmd BufRead,BufNewFile *.lua,*.c,*.py,*.sh,*.pl,*.rb,*.erb 2match Underlined /.\%81v/
 " augroup END
-
+autocmd BufReadPost *.cpp,*.c,*.h,*.py,*.hpp,*.cc,*.cxx,*.java call tagbar#autoopen()
+autocmd vimenter * wincmd p
+autocmd vimenter * NERDTreeToggle
+autocmd vimenter * wincmd p
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -234,6 +238,8 @@ func! QuickRun()
         exec "!go build % &&".newline."&& time ./%<"
     elseif ft == 'sh'
         exec "!".newline."&& time sh %"
+    elseif ft == 'markdown'
+        exec "!pandoc % | w3m -T text/html"
     endif
 endfunc
 
