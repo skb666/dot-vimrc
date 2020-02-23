@@ -148,7 +148,7 @@ autocmd FileType ocaml nmap <leader>i :MerlinTypeOf<CR>
 " -----------------------------------------------------------------------------
 " NERDTree
 " -----------------------------------------------------------------------------
-let NERDTreeWinSize = 32
+let NERDTreeWinSize = 35
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
@@ -180,7 +180,7 @@ let NERDSpaceDelims = 1
 let NERDCompactSexyComs = 1
 
 " airline
-let g:airline_theme="onedark"
+let g:airline_theme="light"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
@@ -196,7 +196,7 @@ let g:airline_right_alt_sep = ''
 " tagbar
 " -----------------------------------------------------------------------------
 let g:tagbar_left = 1
-let g:tagbar_width = 32
+let g:tagbar_width = 35
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
