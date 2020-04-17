@@ -93,7 +93,7 @@ let g:ale_lint_on_insert_leave=1
 let g:ale_linters = {
     \   'c++': ['cppcheck', 'clang'],
     \   'c': ['cppcheck', 'clang'],
-    \   'python': ['flake8', 'mypy', 'pylint'],
+    \   'python': ['mypy', 'pylint'],
     \   'java': ['javac'],
     \   'reStructuredText': ['rstcheck'],
 \ }

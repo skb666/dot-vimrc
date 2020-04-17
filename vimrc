@@ -123,7 +123,7 @@ set softtabstop=4 " backspace
 set shiftwidth=4  " indent width
 set expandtab     " expand tab to space
 set smarttab
-" set formatoptions+=mM
+set formatoptions+=mM
 
 " Linebreak on 500 characters
 set lbr
@@ -233,7 +233,7 @@ func! QuickRun()
     elseif ft == 'lua'
         exec "!".newline."&& time lua %"
     elseif ft == 'java'
-        exec "!clear && javac -source 13 --enable-preview % &&".newline."&& time java --enable-preview %:r"
+        exec "!clear && javac_14 -d ../bin % &&".newline."&& time java_14 -cp ../bin %:r"
     elseif ft == 'go'
         exec "!go build % &&".newline."&& time ./%<"
     elseif ft == 'sh'
